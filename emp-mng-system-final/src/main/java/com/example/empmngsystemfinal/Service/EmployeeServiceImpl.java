@@ -2,6 +2,7 @@ package com.example.empmngsystemfinal.Service;
 
 import com.example.empmngsystemfinal.Repository.EmployeeRepository;
 import com.example.empmngsystemfinal.entity.Employee;
+import org.hibernate.FetchNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
+    @Override
+    public Iterable<Employee> findEmployees() {
+       return employeeRepository.findAll();
+
+    }
+
+    @Override
+    public Employee getEmployeeById(long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(()-> new FetchNotFoundException("employee", id));
+        return employee;
+    }
+
+
 
 }

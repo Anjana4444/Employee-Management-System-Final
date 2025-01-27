@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -14,6 +15,12 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @GetMapping("/employees")
+    public String employees(Model model) {
+        model.addAttribute("employees",employeeService.findEmployees());
+        return "employees";
+    }
 
     @GetMapping("/register")
     public String registration(@ModelAttribute("employee")Employee employee, Model model) {
@@ -26,5 +33,12 @@ public class EmployeeController {
     public String saveEmployee(@ModelAttribute("employee")Employee employee) {
         employeeService.saveEmployee(employee);
         return "redirect:/employees";
+    }
+
+    @GetMapping("/updateEmployee/{id}")
+    public String updateEmployee(Model model, @PathVariable Long id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        model.addAttribute("employee", employee);
+        return "updateEmployee";
     }
 }
