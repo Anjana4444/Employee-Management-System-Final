@@ -3,7 +3,9 @@ package com.example.empmngsystemfinal.Service;
 import com.example.empmngsystemfinal.Repository.EmployeeRepository;
 import com.example.empmngsystemfinal.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
