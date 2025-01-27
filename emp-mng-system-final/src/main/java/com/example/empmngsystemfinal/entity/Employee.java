@@ -1,13 +1,12 @@
 package com.example.empmngsystemfinal.entity;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class employee {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -15,7 +14,7 @@ public class employee {
     private String lastname;
     private String email;
 
-    public employee() {
+    public Employee() {
     }
 
 
