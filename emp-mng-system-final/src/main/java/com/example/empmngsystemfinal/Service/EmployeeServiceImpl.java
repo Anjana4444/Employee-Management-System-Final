@@ -13,8 +13,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public void saveEmployee(Employee employee) {
+    public Employee saveEmployee(Employee employee) {
         employeeRepository.save(employee);
+        return employee;
     }
     @Override
     public Iterable<Employee> findEmployees() {
@@ -27,6 +28,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(()-> new FetchNotFoundException("employee", id));
         return employee;
+    }
+
+    @Override
+    public Employee updateEmployee(long id, Employee employeeDetails) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new FetchNotFoundException("employee", id));
+
+        employee.setFirstname(employeeDetails.getFirstname());
+        employee.setLastname(employeeDetails.getLastname());
+        employee.setEmail(employeeDetails.getEmail());
+
+        return employeeRepository.save(employee);
     }
 
     @Override

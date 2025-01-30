@@ -4,9 +4,10 @@ import com.example.empmngsystemfinal.entity.Employee;
 
 public interface EmployeeService {
 
-    void saveEmployee(Employee employee);
+    Employee saveEmployee(Employee employee);
     Iterable<Employee> findEmployees();
     Employee getEmployeeById(long id);
+    Employee updateEmployee(long id, Employee employee);
 
     void deleteEmployee(long id);
 }
