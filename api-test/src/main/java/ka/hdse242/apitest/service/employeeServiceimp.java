@@ -1,6 +1,6 @@
 package ka.hdse242.apitest.service;
 
-import ka.hdse242.apitest.model.employee;
+import ka.hdse242.apitest.model.Employee;
 import ka.hdse242.apitest.repository.employeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,17 +14,17 @@ public class employeeServiceimp implements employeeService {
     private employeeRepository repository;
 
     @Override
-    public employee savedata(employee employee) {
+    public Employee savedata(Employee employee) {
         return repository.save(employee);
     }
 
     @Override
-    public List<employee> getAllEmployee() {
+    public List<Employee> getAllEmployee() {
         return repository.findAll();
     }
 
     @Override
-    public void deleteEmployee(employee employee) {
+    public void deleteEmployee(Employee employee) {
         repository.delete(employee);
     }
 }

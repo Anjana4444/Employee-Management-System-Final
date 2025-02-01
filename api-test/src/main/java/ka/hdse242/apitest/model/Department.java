@@ -7,14 +7,14 @@ import java.util.List;
 @Table(name = "departments")
 public class Department {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<employee> employees;
+    private List<Employee> Employees;
 
     public Department() {}
 
@@ -38,11 +38,11 @@ public class Department {
         this.name = name;
     }
 
-    public List<employee> getEmployees() {
-        return employees;
+    public List<Employee> getEmployees() {
+        return Employees;
     }
 
-    public void setEmployees(List<employee> employees) {
-        this.employees = employees;
+    public void setEmployees(List<Employee> Employees) {
+        this.Employees = Employees;
     }
 }

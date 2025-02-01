@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Register Employee</title>
+    <link rel="stylesheet" href="registration.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script>
-        
         function registerEmployee(event) {
-            event.preventDefault();  
+            event.preventDefault();
 
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
@@ -17,7 +18,6 @@
                 email: email
             };
 
-            
             fetch("http://localhost:8080/empdata/savedata", {
                 method: "POST",
                 headers: {
@@ -25,15 +25,15 @@
                 },
                 body: JSON.stringify(employee)
             })
-            .then(response => response.text())
-            .then(data => {
-                alert(data); 
-                window.location.href = "/employees"; 
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("Error registering employee");
-            });
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.href = "/employees";
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Error registering employee");
+                });
         }
     </script>
 </head>
@@ -74,7 +74,7 @@
                 <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
             </div>
             <button type="submit" class="btn btn-success">Save</button>
-            <a href="/employees" class="btn btn-secondary">Cancel</a>
+            <a href="/employees.html" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 

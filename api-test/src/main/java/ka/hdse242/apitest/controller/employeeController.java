@@ -1,6 +1,6 @@
 package ka.hdse242.apitest.controller;
 
-import ka.hdse242.apitest.model.employee;
+import ka.hdse242.apitest.model.Employee;
 import ka.hdse242.apitest.service.employeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +17,17 @@ public class employeeController {
     private employeeService employeeService;
 
     @PostMapping("/savedata")
-    public String add(employee employee){
+    public String add(Employee employee){
         employeeService.savedata(employee);
         return "data added successfully";
     }
 
     @GetMapping("/getdata")
-    public List<employee> getAllEmployee(){
+    public List<Employee> getAllEmployee(){
         return employeeService.getAllEmployee();
     }
     @DeleteMapping("/delete{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable employee employee){
+    public ResponseEntity<String> deleteEmployee(@PathVariable Employee employee){
         try{
             employeeService.deleteEmployee(employee);
             return ResponseEntity.ok("data deleted successfully");

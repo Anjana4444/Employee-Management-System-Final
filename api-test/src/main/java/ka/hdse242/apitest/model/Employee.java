@@ -3,10 +3,11 @@ package ka.hdse242.apitest.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+
 
 @Entity
-public class employee {
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +16,7 @@ public class employee {
     private String lastname;
     private String email;
 
-    public employee() {
+    public Employee() {
     }
 
     public int getId() {

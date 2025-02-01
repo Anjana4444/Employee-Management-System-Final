@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Management</title>
+    <link rel="stylesheet" href="department.css">
+</head>
+
+<body>
+
+    <h2>Department Management</h2>
+
+    <label for="deptName">Department Name:</label>
+    <input type="text" id="deptName" required>
+    <button onclick="addDepartment()">Add Department</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Department Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="departmentTableBody">
+            <!-- Departments will be dynamically loaded here -->
+        </tbody>
+    </table>
+
+    <script>
+        function fetchDepartments() {
+            fetch('http://localhost:8080/api/departments')
+                .then(response => response.json())
+                .then(data => {
+                    let tableBody = document.getElementById("departmentTableBody");
+                    tableBody.innerHTML = "";
+                    data.forEach(department => {
+                        let row = `<tr>
+                            <td>${department.id}</td>
+                            <td>${department.name}</td>
+                            <td>
+                                <button onclick="deleteDepartment(${department.id})">Delete</button>
+                            </td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                });
+        }
+
+        function addDepartment() {
+            let deptName = document.getElementById("deptName").value;
+            if (!deptName) {
+                alert("Please enter a department name.");
+                return;
+            }
+
+            fetch('http://localhost:8080/api/departments', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: deptName })
+            }).then(response => {
+                if (response.ok) {
+                    alert("Department added successfully!");
+                    document.getElementById("deptName").value = "";
+                    fetchDepartments();
+                } else {
+                    alert("Failed to add department.");
+                }
+            });
+        }
+
+        function deleteDepartment(id) {
+            fetch(`/api/departments/${id}`, {
+                method: "DELETE"
+            }).then(response => {
+                if (response.ok) {
+                    alert("Department deleted successfully!");
+                    fetchDepartments();
+                } else {
+                    alert("Failed to delete department.");
+                }
+            }).catch(error => {
+                console.error("Error deleting department:", error);
+                alert("An error occurred while deleting the department.");
+            });
+        }
+
+        window.onload = fetchDepartments;
+    </script>
+
+</body>
+
+</html>
